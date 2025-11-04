@@ -1,236 +1,514 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Javier Sánchez Páez - Security & Site Reliability Specialist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="img/javsanpae.png" />
+  <title>Sergio Parejo Rama - Embedded Systems Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #64748b;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.3s;
+    }
+
+    .contact-info a:hover {
+      opacity: 0.8;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      display: inline-block;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .dark-mode .card {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .card-subtitle {
+      font-size: 1rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .dark-mode .card-subtitle {
+      color: var(--gray);
+    }
+
+    .card-date {
+      font-size: 0.9rem;
+      color: var(--gray);
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .card-content ul {
+      padding-left: 1.5rem;
+    }
+
+    .card-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-category h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .dark-mode .skill-tag {
+      background: var(--primary-dark);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .profile-img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .project-description {
+      flex-grow: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border);
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    .dark-mode footer {
+      border-top: 1px solid #334155;
+    }
+
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .card-header {
+        flex-direction: column;
+      }
+      
+      .card-date {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
   <header>
-    <h1>Javier Sánchez Páez</h1>
-    <p>Security & Site Reliability Specialist</p>
-    <div class="socials">
-      <a href="https://calendar.google.com/calendar/u/0/appointments/AcZssZ2tAVNEUtVwJ57EuRS5OrYAtczL5ZHbccxpnYs=" target="_blank" aria-label="Contact">
-        <i data-lucide="contact"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/javsanpae" target="_blank" aria-label="LinkedIn">
-        <i data-lucide="linkedin"></i>
-      </a>
-      <a href="https://github.com/javsanpae" target="_blank" aria-label="GitHub">
-        <i data-lucide="github"></i>
-      </a>
-      <a href="mailto:javsanpae@gmail.com" target="_blank" aria-label="Mail">
-        <i data-lucide="mail"></i>
-      </a>
-    </div>
-    <div class="theme-switch">
-      <button id="theme-toggle">
-        <i id="theme-icon" data-lucide="sun"></i>
+    <div class="container">
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
       </button>
+      <h1>Sergio Parejo Rama</h1>
+      <p>Embedded Systems Engineer | Electronics & Robotics Student</p>
+      <div class="contact-info">
+        <a href="mailto:sergioparejorama@gmail.com">
+          <i class="fas fa-envelope"></i> sergioparejorama@gmail.com
+        </a>
+        <a href="tel:+34680410382">
+          <i class="fas fa-phone"></i> +34 680410382
+        </a>
+        <a href="https://sheetsresume.com/" target="_blank">
+          <i class="fas fa-globe"></i> Portfolio / GitHub
+        </a>
+      </div>
     </div>
   </header>
-  
-  <section class="section">
-    <h2>About me</h2>
-    <div class="about">
-      <img src="img/javsanpae.png" alt="My Professional Image" />
-      <div>
-        <p>Hi! I'm <strong>Javier</strong>, and I'm <strong>passionate</strong> about the IT field. I'm experienced in <strong>cybersecurity, cloud architecture, automation and reliability best practices.</strong></p>
-        <p>Throughout my career, I’ve participated in <strong>key projects</strong> such as:</p>          
-        <ul>
-          <li>- Migration of services to cloud environments.</li>
-          <li>- Implementation of observability and secure deployments.</li>
-          <li>- Security reinforcement through hardening guides and SSDLC practices.</li>
-          <li>- Supporting developers to enhance their autonomy in "Cross DevOps" environments.</li>
-        </ul>        
-        <p>I currently hold the <strong>Certified Kubernetes Administrator (CKA)</strong> certification and I'm preparing for the <strong>AWS Solutions Architect</strong>.</p>
-        <p>On my training roadmap, I also have the CKS and AWS Security Specialty.</p>
-        <p>I believe in <strong>simple, effective solutions</strong>, well adapted to the <strong>real needs</strong> of the product and the team. I work hard to apply principles like KISS and to <strong>minimize technical debt</strong>, always with an open mindset and clear communication.</p>
-        <p>If you'd like to know more about me (or just want to say hi), feel free to connect with me via LinkedIn or send me an email. I'd be more than happy to hear from you.</p>
-        <p>Thank you for reading, I hope you have a great day.</p>  
+
+  <div class="container">
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="card">
+        <div class="about-content">
+          <div>
+            <img src="https://via.placeholder.com/250" alt="Sergio Parejo Rama" class="profile-img">
+          </div>
+          <div>
+            <p>I am a student about to graduate in January 2026, currently working as a part-time junior embedded system engineer since March 2025. I'm passionate about electronics engineering with strong interests in PCB design, embedded systems, and real-time operating systems.</p>
+            <p>Throughout my academic and professional journey, I've developed expertise in programming microcontrollers, PCB testing, and implementing IoT solutions using technologies like NB-IoT and MQTTs.</p>
+            <p>My academic focus is on electronics, with strong knowledge in analogue electronics and a particular interest in analogue design.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <h2>Experience</h2>
-
-    <div class="card">
-      <div class="card-header">
-        <a href="https://www.santander.com/es/home" target="_blank">
-          <img src="img/santander.png" alt="Santander Bank" />
-        </a>
-        <div>DevSecOps Engineer - Santander Bank (2024 - Now) · Málaga</div>
+    <section id="experience">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Embedded Systems Engineer</h3>
+            <p class="card-subtitle">AICIA · Seville, Spain</p>
+          </div>
+          <div class="card-date">Mar. 2025 – Present</div>
+        </div>
+        <div class="card-content">
+          <p>AICIA is a research and development center of the University of Seville, heavily focused on European projects involving Andalusia.</p>
+          <ul>
+            <li>Programming microcontrollers STM32 family using C++ in FreeRTOS for low-powered embedded systems</li>
+            <li>Testing PCBs made for projects to ensure correct functionality</li>
+            <li>Using NB-IoT technology for communication over the cloud and updates using MQTTs</li>
+          </ul>
+        </div>
       </div>
-      <p>Santander Bank is one of the world's largest financial institutions, with a strong focus on technological innovation in banking. As part of its internal tech division, I contribute to the secure and efficient development and operation of cloud-native systems. Key responsibilities and achievements include:</p>
-      <ul>
-        <li>⚓ Improve resiliency and performance of production Kubernetes/OpenShift clusters.</li>
-        <li>🐛 Promote security best practices: Vulnerability Management, Threat Modeling, OWASP, GRC. </li>
-        <li>📊 Implement and maintain observability using Grafana, Prometheus and the ELK Stack.</li>
-        <li>🤖 Automate infrastructure and operational tasks using Python/FastAPI and Bash.</li>
-        <li>💪 Drive Chaos Engineering and Cloud-Native initiatives to improve platform resilience.</li>
-        <li>🛡 Integrate automated security scanning into CI/CD pipelines with ArgoCD and GitHub Actions.</li>
-        <li>💼 Achieve FinOps and performance optimization across AWS/Azure environments.</li>
-        <li>🕸 Migrate legacy systems to microservices architecture.</li>
-        <li>⌨️ Manage Infrastructure as Code (IaC) and provisioning with version control.</li>
-        <li>👥 Mentor peers in SRE and Platform Engineering practices.</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="card-header">
-        <a href="https://www.derivco.com" target="_blank">
-          <img src="img/derivco.png" alt="Derivco Systems" />
-        </a>
-        <div>Site Reliability Engineer - Derivco (2023 - 2024) · Málaga</div>
+    <section id="education">
+      <h2 class="section-title">Education</h2>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Electronics, Robotics and Mechatronics Engineering Bachelor's Degree</h3>
+            <p class="card-subtitle">University of Seville · Seville, Spain</p>
+          </div>
+          <div class="card-date">Expected Jan. 2026</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>Speciality in Electronics</li>
+            <li>Strong knowledge in analogue electronics</li>
+            <li>Favorite subject: Lab of Analogue Design Electronics</li>
+          </ul>
+        </div>
       </div>
-      <p>Derivco specializes in developing cutting-edge software for the gaming industry, enhancing player experiences through technology. During this period, I worked on the following tasks:</p>
-      <ul>
-        <li>☁ Migrated large databases and web servers to the cloud</li>
-        <li>♾ Automated critical manual processes (like backups, reports and deployments)</li>
-        <li>🚀 Set up continuous deployments with Blue/Green and Canary strategies</li>
-        <li>🔗 Integrated tools and automation to improve SLAs</li>
-        <li>📈 Improved observability using tools like Grafana and the ELK stack</li>
-        <li>🌐 Managed load balancing using network and controller solutions</li>
-        <li>📩 Provided support to customers and developers</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="card-header">
-        <a href="https://www.kyndryl.com/es/es" target="_blank">
-          <img src="img/kyndryl.png" alt="Kyndryl España" />
-        </a>
-        <div>(Traineeship) DevOps Engineer - Kyndryl (2023) · Granada</div>
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-grid">
+        <div class="card project-card">
+          <h3 class="project-title">Monitoring Ambient and Soil for Detection of "Seca"</h3>
+          <div class="project-description">
+            <p>Final degree project in collaboration with AICIA, working with real-time systems to master programming skills complementing university education.</p>
+          </div>
+        </div>
+        
+        <div class="card project-card">
+          <h3 class="project-title">Autonomous Car</h3>
+          <div class="project-description">
+            <p>Four-month project with eight students involving LiDARs, telemetry and ESP32 to develop a car that dodged walls and functioned without human aid.</p>
+          </div>
+        </div>
+        
+        <div class="card project-card">
+          <h3 class="project-title">MarioKart</h3>
+          <div class="project-description">
+            <p>Small racing video game developed in two months using two Artyx-7 with symmetric intercommunication and display via VGA, learning VHDL and FPGA operation.</p>
+          </div>
+        </div>
+        
+        <div class="card project-card">
+          <h3 class="project-title">Coffee Maker</h3>
+          <div class="project-description">
+            <p>Programmed ESP32 to create automation algorithm and communication to a mobile app using WiFi and serial communication between two ESP32 devices.</p>
+          </div>
+        </div>
+        
+        <div class="card project-card">
+          <h3 class="project-title">PCB Design</h3>
+          <div class="project-description">
+            <p>Currently learning and making different PCBs in Altium for personal audio projects such as guitar pedals.</p>
+          </div>
+        </div>
       </div>
-      <p>Kyndryl is a leading IT infrastructure service provider formed from IBM’s infrastructure services spin-off. My tasks included:</p>
-      <ul>
-        <li>⚓ Managed Kubernetes clusters, CI/CD and IaC tools</li>
-        <li>🌐 Automated networking processes</li>
-        <li>📊 Monitored network infrastructure and compute resources</li>
-      </ul>
-    </div>
+    </section>
 
-
-  </section>
-
-  <section class="section">
-    <h2>Education</h2>
-
-    <div class="card">
-      <div class="card-header">
-        <a href="https://www.ieszaidinvergeles.org/" target="_blank">
-          <img src="img/izv.png" alt="IES Zaidín-Vergeles" />
-        </a>
-        <div>Certificate of Higher Education - Networked Computer Systems Administration · Granada</div>
+    <section id="research">
+      <h2 class="section-title">Research</h2>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Research Assistant</h3>
+            <p class="card-subtitle">University of Seville, Electronics Lab · Seville, Spain</p>
+          </div>
+          <div class="card-date">2023 – 2024</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>Design of EMIs and industrial settings resistant circuits to measure temperature of power electronics transistors</li>
+            <li>Used LT-SPICE and Design Spark</li>
+            <li>Learned lab safety protocols</li>
+          </ul>
+        </div>
       </div>
-      <p>Grade: 8.46</p>
-      <ul>
-        <li>📋 Relational databases (Microsoft SQL Server) queries and administration.</li>
-        <li>📊 Frontend (HTML, CSS), backend (PHP), data exchange (XML) and general-purpose (Python) development languages.</li>
-        <li>🖥️ Hardware/Software maintenance and scalability.</li>
-        <li>⚓ App containerization (Docker, Amazon Web Services)</li>
-        <li>🏢 Windows and Linux Server Administration (Batch & Bash scripting, LDAP, Active Directory, Printing Services).</li>
-        <li>⛲ System Virtualization (VirtualBox, ProxMox VE, VMWare).</li>
-        <li>💼 ERP Management (Odoo, Holded).</li>
-        <li>💡 Kanban/Scrum methodology (Todoist, Trello).</li>
-        <li>🌐 Networking (CCNA1, CCNA2) and server (DHCP, DNS, VSFTPD, HTTPD, SSH, Proxy) administration.</li>
-        <li>🐧 Linux (CentOS, Debian, Ubuntu) and Windows (Server 2019, 10) administration.</li>
-        <li>🧮 Version control driven development (Git/GitHub, Fossil).</li>
-      </ul>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="card-header">
-        <a href="https://www.netacad.com/" target="_blank">
-          <img src="img/cisco.png" alt="Cisco Networking Academy" />
-        </a>
-        <div>Cisco CCNA1/CCNA2, Network & System Administration</div>
+    <section id="volunteering">
+      <h2 class="section-title">Volunteering</h2>
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Student Representative</h3>
+            <p class="card-subtitle">University of Seville</p>
+          </div>
+          <div class="card-date">2021 – 2026</div>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>University-level representative of students' rights</li>
+            <li>Primary organizer of events to promote activities and teambuilding among professors and students</li>
+          </ul>
+        </div>
       </div>
-      <p>
-        Participation in CCNA 1 and 2 (Cisco Networking Academy) preparatory courses, covering networking fundamentals, switching and routing.
-      </p>
-      <br>
-        <a href="https://www.credly.com/badges/5a7e62e0-563a-44c3-8d16-8dc7c8547a76">CCNA1 Badge</a>
-      <br>
-        <a href="https://www.credly.com/badges/a2697f2c-5ba3-4bb9-981f-227a68983baa">CCNA2 Badge</a>
-    </div>
+    </section>
 
-  </section>
-
-  <section class="section">
-    <h2>Licenses & Certifications</h2>
-
-    <div class="card">
-      <div class="card-header">
-        <img src="img/cka.png" alt="Certified Kubernetes Administrator" />
-        <a href="https://www.credly.com/badges/7d9035fe-fa3b-48fd-b2e5-e0bf6cd1872b" target="_blank">
-          <div>CKA: Certified Kubernetes Administrator</div>
-        </a>
+    <section id="skills">
+      <h2 class="section-title">Skills & Certifications</h2>
+      <div class="skills-grid">
+        <div class="card">
+          <h3 class="card-title">Certifications</h3>
+          <div class="skill-category">
+            <ul>
+              <li>PCBs Design issued by COGITI</li>
+              <li>B2 Level English by Cambridge University</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="card-title">Technologies</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Design Spark</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">LT-Spice</span>
+            <span class="skill-tag">VHDL</span>
+            <span class="skill-tag">Altium</span>
+            <span class="skill-tag">IAR</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="card-title">Skills</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Leadership</span>
+            <span class="skill-tag">Teamwork</span>
+            <span class="skill-tag">Autonomous Learning</span>
+            <span class="skill-tag">Curiosity</span>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3 class="card-title">Interests</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Climbing</span>
+            <span class="skill-tag">Gym</span>
+            <span class="skill-tag">Videogames</span>
+            <span class="skill-tag">Electronics</span>
+            <span class="skill-tag">Cats</span>
+          </div>
+        </div>
       </div>
-      <p>Earners of this designation demonstrated the skills, knowledge and competencies to perform the responsibilities of a Kubernetes Administrator. Earners demonstrated proficiency in Application Lifecycle Management, Installation, Configuration & Validation, Core Concepts, Networking, Scheduling, Security, Cluster Maintenance, Logging / Monitoring, Storage, and Troubleshooting.</p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <img src="img/efset.png" alt="EFSET" />
-        <a href="https://cert.efset.org/6xb6eS" target="_blank">
-          <div>EFSET English Certificate - C2 Proficient</div>
-        </a>
-      </div>
-      <p><strong>READING:</strong> You can read both factual and literary texts with ease, recognizing differences in style and tone. You can understand complex technical writing on unfamiliar subjects.</p>
-      <ul>
-        <li>- Can understand a wide range of demanding, longer texts, and recognize implicit meaning</li>
-        <li>- Can understand long and complex factual and literary texts, appreciating distinctions of style</li>
-        <li>- Can understand specialized articles and longer technical instructions, even when they do not relate to own field</li>
-      </ul>
-      <br>
-      <p><strong>LISTENING:</strong> You are comfortable in all situations, live or broadcast, that require full comprehension; you are almost never confused or searching for the meaning of words and phrases. You understand nuances of expression and tone, humor and emphasis in all live theatrical presentations, films or broadcast presentations.</p>
-      <ul>
-        <li>- Can understand with ease any kind of spoken language, live or broadcast, even when delivered at fast native speed, provided with time to get familiar with any regional or other accent</li>
-        <li>- Can understand lectures and presentations with a high degree of colloquialism, regional usage and unfamiliar terminology</li>
-        <li>- Can follow complex interactions in group discussions and debates, even on abstract, complex and unfamiliar topics</li>
-      </ul>
-
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <img src="img/saa-03.png" alt="AWS Solutions Architect - Associate" />
-        <!-- <a href="NULL" target="_blank">  -->
-          <div>AWS Solutions Architect - Associate (In Progress)</div>
-        <!-- </a> -->
-      </div>
-      <p>An AWS Solutions Architect Associate is responsible for designing and deploying scalable, highly available, and fault-tolerant systems on Amazon Web Services (AWS). They assess application requirements, select appropriate AWS services, and ensure systems are secure, cost-efficient, and reliable. The role includes defining architecture patterns, managing cloud infrastructure, optimizing resource usage, and ensuring seamless integration with other systems. Professionals with this certification are skilled in cloud migration, infrastructure automation, and disaster recovery planning, with a strong understanding of network architecture, data storage solutions, and security frameworks within the AWS ecosystem.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Interests and Hobbies</h2>
-    <div class="card">
-      <p>When I'm not immersed in my role, I enjoy a variety of activities. Here’s a glimpse into what keeps me good:</p>
-      <ul>
-        <li>🎸 <strong>Playing instruments: </strong>I’ve been playing bass and guitar for 10 years, and I’m always looking for new ways to improve. Music is my go-to for disconnecting..</li>
-        <li>🎧 <strong>Music: </strong>My tastes range from rock and alternative to hip-hop. Always excited to talk about favorite artists, let me know yours!</li>
-        <li>🎮 <strong>Video games: </strong>My brother introduced me to gaming on the PS2, and since then, I’ve been interested on action games with deep stories, being The Last of Us my favorite one.</li>
-        <li>🚗 <strong>Cars: </strong>I have a passion for driving and anything related to motorsports. I love staying updated and attending car meets, they’re a great way to connect with others who share the same enthusiasm.</li>
-        <li>🏋️‍♂️ <strong>Gym: </strong>Working in tech means a lot of sitting, so I try to hit the gym (quite) regularly.</li>
-        <li>🌲 <strong>Hiking: </strong>There's nothing like spending time outdoors to reconnect with nature, something we often overlook and just take for granted in our busy lives.</li>
-      </ul>
-    </div>
-  </section>
-
-
+    </section>
+  </div>
 
   <footer>
-    &copy; 2025 Javier Sánchez Páez · Developed with assistance from AI tools, using HTML, CSS and a tiiiny bit of JS and coffee ☕
+    <div class="container">
+      <p>© 2025 Sergio Parejo Rama · Embedded Systems Engineer</p>
+    </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    });
+  </script>
 </body>
 </html>
