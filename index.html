@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
+      --primary: #1e40af;
+      --primary-dark: #1e3a8a;
       --secondary: #64748b;
-      --dark: #1e293b;
+      --dark: #0f172a;
       --light: #f8fafc;
       --gray: #94a3b8;
-      --border: #e2e8f0;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --border: #334155;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
 
     * {
@@ -27,14 +27,14 @@
     body {
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      color: var(--dark);
-      background-color: var(--light);
+      color: #e2e8f0;
+      background-color: var(--dark);
       transition: all 0.3s ease;
     }
 
-    body.dark-mode {
-      background-color: #0f172a;
-      color: #e2e8f0;
+    body.light-mode {
+      background-color: var(--light);
+      color: var(--dark);
     }
 
     .container {
@@ -117,7 +117,7 @@
     }
 
     .card {
-      background: white;
+      background: #1e293b;
       border-radius: 8px;
       box-shadow: var(--shadow);
       padding: 1.5rem;
@@ -125,9 +125,9 @@
       transition: transform 0.3s;
     }
 
-    .dark-mode .card {
-      background: #1e293b;
-      color: #e2e8f0;
+    .light-mode .card {
+      background: white;
+      color: var(--dark);
     }
 
     .card:hover {
@@ -149,12 +149,12 @@
 
     .card-subtitle {
       font-size: 1rem;
-      color: var(--secondary);
+      color: var(--gray);
       margin-bottom: 0.5rem;
     }
 
-    .dark-mode .card-subtitle {
-      color: var(--gray);
+    .light-mode .card-subtitle {
+      color: var(--secondary);
     }
 
     .card-date {
@@ -201,8 +201,8 @@
       font-size: 0.85rem;
     }
 
-    .dark-mode .skill-tag {
-      background: var(--primary-dark);
+    .light-mode .skill-tag {
+      background: var(--primary);
     }
 
     .about-content {
@@ -241,17 +241,40 @@
       flex-grow: 1;
     }
 
+    .view-all-projects {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .view-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .view-all-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
     footer {
       text-align: center;
       padding: 2rem 0;
       margin-top: 3rem;
       border-top: 1px solid var(--border);
-      color: var(--secondary);
+      color: var(--gray);
       font-size: 0.9rem;
     }
 
-    .dark-mode footer {
-      border-top: 1px solid #334155;
+    .light-mode footer {
+      border-top: 1px solid var(--border);
     }
 
     @media (max-width: 768px) {
@@ -276,11 +299,11 @@
     }
   </style>
 </head>
-<body>
+<body class="dark-mode">
   <header>
     <div class="container">
       <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
       </button>
       <h1>Sergio Parejo Rama</h1>
       <p>Embedded Systems Engineer | Electronics & Robotics Student</p>
@@ -309,7 +332,7 @@
           <div>
             <p>I am a student about to graduate in January 2026, currently working as a part-time junior embedded system engineer since March 2025. I'm passionate about electronics engineering with strong interests in PCB design, embedded systems, and real-time operating systems.</p>
             <p>Throughout my academic and professional journey, I've developed expertise in programming microcontrollers, PCB testing, and implementing IoT solutions using technologies like NB-IoT and MQTTs.</p>
-            <p>My academic focus is on electronics, with strong knowledge in analogue electronics and a particular interest in analogue design.</p>
+            <p>My academic focus is on electronics, with strong knowledge in analogue, digital and power electronics and a particular interest in PCB design.</p>
           </div>
         </div>
       </div>
@@ -326,11 +349,11 @@
           <div class="card-date">Mar. 2025 – Present</div>
         </div>
         <div class="card-content">
-          <p>AICIA is a research and development center of the University of Seville, heavily focused on European projects involving Andalusia.</p>
+          <p>AICIA is a research and development center of the University of Seville, efficient IoT connections in rural and industrial environments in Andalusia.</p>
           <ul>
             <li>Programming microcontrollers STM32 family using C++ in FreeRTOS for low-powered embedded systems</li>
             <li>Testing PCBs made for projects to ensure correct functionality</li>
-            <li>Using NB-IoT technology for communication over the cloud and updates using MQTTs</li>
+            <li>NB-IoT technology for communication over the cloud and updates using MQTTs</li>
           </ul>
         </div>
       </div>
@@ -393,6 +416,12 @@
             <p>Currently learning and making different PCBs in Altium for personal audio projects such as guitar pedals.</p>
           </div>
         </div>
+      </div>
+      
+      <div class="view-all-projects">
+        <a href="https://sheetsresume.com/" target="_blank" class="view-all-btn">
+          <i class="fas fa-external-link-alt"></i> View All Projects
+        </a>
       </div>
     </section>
 
@@ -499,14 +528,14 @@
     const themeIcon = themeToggle.querySelector('i');
     
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle('light-mode');
       
-      if (document.body.classList.contains('dark-mode')) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      } else {
+      if (document.body.classList.contains('light-mode')) {
         themeIcon.classList.remove('fa-sun');
         themeIcon.classList.add('fa-moon');
+      } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
       }
     });
   </script>
